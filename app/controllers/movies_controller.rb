@@ -21,12 +21,15 @@ class MoviesController < ApplicationController
       return
     end
     
+    @selected_ratings = params[:ratings] || session[:ratings] || {}
     if @selected_ratings == {}
       @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
     
-    @movies = Movie.sort(@selected_ratings.keys)
-    #@movies = Movie.all
+    
+    
+    #@movies = Movie.sort(@selected_ratings.keys)
+    @movies = Movie.all
   end
 
   #def index
