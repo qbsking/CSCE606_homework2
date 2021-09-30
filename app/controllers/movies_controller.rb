@@ -25,7 +25,8 @@ class MoviesController < ApplicationController
       @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
     
-    @movies = Movie.all
+    @movies = Movie.sort(@selected_ratings.keys)
+    #@movies = Movie.all
   end
 
   #def index
