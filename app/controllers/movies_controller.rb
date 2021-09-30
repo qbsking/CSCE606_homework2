@@ -15,14 +15,16 @@ class MoviesController < ApplicationController
     when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
-      if @selected_ratings != {}
+      if session[:ratings] != {}
+        @selected_ratings = session[:ratings]
         @movies = @movies.where(:rating => @selected_ratings.keys)
       end
       return
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
-      if @selected_ratings != {}
+      if session[:ratings] != {}
+        @selected_ratings = session[:ratings]
         @movies = @movies.where(:rating => @selected_ratings.keys)
       end
       return
