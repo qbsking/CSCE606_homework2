@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     sort = params[:sort] || session[:sort]
     case sort
     when 'title'
-      @title_header = 'hilite'
+      #@title_header = 'hilite'
       @movies = Movie.order(:title)
       return
     when 'release_date'
