@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
       #ordering,@date_header = {:order => :release_date}, 'hilite'
     end
     
-    @movies = Movie.all
+    @movies = Movie.order(:title)
   end
 
   #def index
