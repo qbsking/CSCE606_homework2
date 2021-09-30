@@ -21,6 +21,10 @@ class MoviesController < ApplicationController
       return
     end
     
+    if @selected_ratings == {}
+      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
+    end
+    
     @movies = Movie.all
   end
 
