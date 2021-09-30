@@ -31,7 +31,12 @@ class MoviesController < ApplicationController
       session[:ratings] = @selected_ratings
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
-    @moviesMovie.with_ratings(@selected_ratings)
+    
+    if @selected_ratings == nil
+      @movies = Movie.all
+    else
+      @moviesMovie.with_ratings(@selected_ratings)
+    end
     #@movies = Movie.sort(@selected_ratings.keys)
     #@movies = Movie.all
   end
