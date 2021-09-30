@@ -14,11 +14,11 @@ class MoviesController < ApplicationController
     when 'title'
       @title_header = 'hilite'
       
-      @movies = @movies.order(:title)
+      @movies = Movie.order(:title)
       return
     when 'release_date'
       @date_header = 'hilite'
-      @movies = @movies.order(:release_date)
+      @movies = Movie.order(:release_date)
       return
     end
     
