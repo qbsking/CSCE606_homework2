@@ -22,21 +22,12 @@ class MoviesController < ApplicationController
     end
     
     @selected_ratings = params[:ratings] || session[:ratings] || {}
-    if @selected_ratings == {}
-      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
-    end
     
-    printf "begin"
-    printf @selected_ratings
-    printf "end"
+    @movies = Movie.all
     
-    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
-      session[:sort] = sort
-      session[:ratings] = @selected_ratings
-      redirect_to :sort => sort, :ratings => @selected_ratings and return
-    end
-    
-    @movies = Movie.sort_by(:rating => @selected_ratings)
+    if @selected_ratings != {}
+      @movies = @movies.where(:rating => @selected_ratings)
+      
     #@movies = Movie.sort(@selected_ratings.keys)
     #@movies = Movie.all
   end
