@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
     case sort
     when 'title_header'
       #@title_header = 'hilite'
+      hilite()
       @movies = Movie.order(:title)
       return
     when 'release_date'
