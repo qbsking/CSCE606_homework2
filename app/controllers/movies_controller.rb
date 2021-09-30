@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
       #ordering,@date_header = {:order => :release_date}, 'hilite'
     end
     #@movies = Movie.all
-    @movies = Movie.find params[:id]
+    @movies = Movie.find(1)
   end
 
   #def index
