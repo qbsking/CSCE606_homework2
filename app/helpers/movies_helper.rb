@@ -4,6 +4,6 @@ module MoviesHelper
     count.odd? ?  "odd" :  "even"
   end
   def hilite
-    params[:sort] == 'sortBy' ? {class: 'hilite' } : {}
+    params[:sort] == 'title_header' ? {class: 'hilite' } : {}
   end
 end
