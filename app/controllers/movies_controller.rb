@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
     
-    @movies = Movie.where(:rating => @all_ratings)
+    @movies = Movie.where(:rating => @selected_ratings)
     #@movies = Movie.sort(@selected_ratings.keys)
     #@movies = Movie.all
   end
