@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
+      return
     end
     
     @movies = Movie.all
