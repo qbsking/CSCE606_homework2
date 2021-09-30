@@ -15,9 +15,9 @@ class MoviesController < ApplicationController
     when 'release_date'
       #ordering,@date_header = {:order => :release_date}, 'hilite'
     end
-    @all_ratings = Movie.all_ratings
+    @selected_ratings = params[:ratings] || session[:ratings] || {}
     
-    @movies = Movie.all
+    @movies = Movie.find_all_by_rating(@selected_ratings.keys, ordering)
   end
 
   #def index
