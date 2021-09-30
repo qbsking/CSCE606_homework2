@@ -9,8 +9,9 @@ class MoviesController < ApplicationController
   def index
     
     sort = params[:sort] || session[:sort]
+    @all_ratings = Movie.all_ratings
     case sort
-    when 'title_header'
+    when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
       return
@@ -19,8 +20,6 @@ class MoviesController < ApplicationController
       @movies = Movie.order(:release_date)
       return
     end
-    
-    @all_ratings = Movie.all_ratings
     
     @movies = Movie.all
   end
