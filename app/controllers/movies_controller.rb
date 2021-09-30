@@ -25,8 +25,8 @@ class MoviesController < ApplicationController
     
     @movies = Movie.all
     
-    if params[:ratings] != nil
-      @selected_ratings = params[:ratings]
+    if @selected_rating != nil
+      #@selected_ratings = params[:ratings]
       @movies = @movies.where(:rating => @selected_ratings.keys)
       session[:ratings] = @selected_ratings
     end
