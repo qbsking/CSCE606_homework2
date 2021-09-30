@@ -14,7 +14,8 @@ class MoviesController < ApplicationController
       @movies = Movie.order(:title)
       return
     when 'release_date'
-      #ordering,@date_header = {:order => :release_date}, 'hilite'
+      @date_header = 'hilite'
+      @movies = Movie.order(:release_date)
     end
     
     @movies = Movie.all
