@@ -1,7 +1,6 @@
 class Movie < ActiveRecord::Base
+    RatingOrder = %w[G PG PG-13 R NC-17]
     def self.all_ratings
-        all_ratings = Movies.order(:rating).pluck(:rating).uniq # don't retrieve unnecessary datas
-        all_ratings << all_rating.delete('NC-17') # directly inject NC-17 at the end if exists
-        all_ratings.compact # remove nil values
+        RatingOrder & Movie.all.map(&:rating)
     end
 end
