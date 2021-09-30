@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
     when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
+      return
     when 'release_date'
       #ordering,@date_header = {:order => :release_date}, 'hilite'
     end
