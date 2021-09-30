@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     
     if @selected_ratings != {}
-      @movies = @movies.where(:rating => @selected_ratings)
+      @movies = @movies.where(:rating => @selected_ratings.keys)
       
     #@movies = Movie.sort(@selected_ratings.keys)
     #@movies = Movie.all
