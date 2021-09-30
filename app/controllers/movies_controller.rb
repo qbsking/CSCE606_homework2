@@ -11,12 +11,12 @@ class MoviesController < ApplicationController
     case sort
     when 'title'
       ordering,@title_header = {:order => :title}, 'hilite'
-      printf "Sorted by title", ordering
-      printf "finish"
+      printf "Sorted by title"
     when 'release_date'
       #ordering,@date_header = {:order => :release_date}, 'hilite'
     end
-    #@movies = Movie.all
+    @all_ratings = Movie.all_ratings
+    
     @movies = Movie.all
   end
 
