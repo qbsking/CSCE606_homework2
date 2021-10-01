@@ -9,13 +9,7 @@ class MoviesController < ApplicationController
   def index
     
     sort = params[:sort] || session[:sort]
-    @all_ratings = Movie.all_ratings
     
-    @selected_ratings = params[:ratings] || session[:ratings] || {}
-    
-    if @selected_ratings == {}
-      @movies = Movie.all
-    end
     
     case sort
     when 'title'
@@ -23,12 +17,23 @@ class MoviesController < ApplicationController
       @movies = Movie.order(:title)
       session[:sort] = 'title'
       @sort_column = 'title'
+      return
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
       session[:sort] = 'release_date'
       @sort_column = 'release_date'
+      return
     end
+    
+    @all_ratings = Movie.all_ratings
+    @selected_ratings = params[:ratings] || session[:ratings] || {}
+    
+    if @selected_ratings == {}
+      @movies = Movie.all
+    end
+    
+    
     
     if params[:session] == "clear"
       session[:sort] = nil
