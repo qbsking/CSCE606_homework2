@@ -17,12 +17,15 @@ class MoviesController < ApplicationController
       @movies = Movie.all
     end
     
-    if session[:sort] == 'title'
-      @movies = @movies.order(:title)
-    end
-    
-    if session[:sort] == 'release_date'
-      @movies = @movies.order(:release_date)
+    case sort
+    when 'title'
+      @title_header = 'hilite'
+      @movies = Movie.order(:title)
+      session[:sort] = 'title'
+    when 'release_date'
+      @date_header = 'hilite'
+      @movies = Movie.order(:release_date)
+      session[:sort] = 'release_date'
     end
     
     if params[:session] == "clear"
@@ -40,18 +43,7 @@ class MoviesController < ApplicationController
       @movies = @movies.where(:rating => session[:ratings].keys)
     end
     
-    case sort
-    when 'title'
-      @title_header = 'hilite'
-      @movies = Movie.order(:title)
-      session[:sort] = 'title'
-      return
-    when 'release_date'
-      @date_header = 'hilite'
-      @movies = Movie.order(:release_date)
-      session[:sort] = 'release_date'
-      return
-    end
+    
     
       
   end
