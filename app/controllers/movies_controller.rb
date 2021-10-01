@@ -34,7 +34,9 @@ class MoviesController < ApplicationController
     
     @selected_ratings = params[:ratings] || session[:ratings] || {}
     
-    @movies = Movie.all
+    if @selected_ratings == {}
+      @movies = Movie.all
+    end
     
     if params[:session] == "clear"
       session[:sort] = nil
