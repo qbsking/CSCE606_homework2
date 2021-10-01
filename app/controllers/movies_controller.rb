@@ -13,11 +13,8 @@ class MoviesController < ApplicationController
     
     @selected_ratings = params[:ratings] || session[:ratings] || {}
     
-    @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
-    
     if @selected_ratings == {}
       @movies = Movie.all
-      
     end
     
     case sort
