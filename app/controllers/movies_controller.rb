@@ -42,7 +42,7 @@ class MoviesController < ApplicationController
     if params[:ratings] != nil
       @selected_ratings = params[:ratings] 
       printf "begin"
-      printf session[:ratings]
+      printf params[:ratings]
       printf "end"
       @movies = @movies.where(:rating => @selected_ratings.keys)
       session[:ratings] = @selected_ratings
