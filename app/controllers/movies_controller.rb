@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
     when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
+      session[:sort] = 'title'
       if session[:ratings] != nil
         @selected_ratings = session[:ratings]
         @movies = @movies.where(:rating => @selected_ratings.keys)
@@ -23,6 +24,7 @@ class MoviesController < ApplicationController
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
+      session[:sort] = 'release_date'
       if session[:ratings] != nil
         @selected_ratings = session[:ratings]
         @movies = @movies.where(:rating => @selected_ratings.keys)
@@ -40,12 +42,23 @@ class MoviesController < ApplicationController
     end
     
     if params[:ratings] != nil
-      @selected_ratings = params[:ratings].merge session[:ratings]
+      @selected_ratings = params[:ratings]
       @movies = @movies.where(:rating => @selected_ratings.keys)
       session[:ratings] = @selected_ratings
     end
-    #@movies = Movie.sort(@selected_ratings.keys)
-    #@movies = Movie.all
+    
+    if session[:ratings] != nil
+      @movies = @movies.where(:rating => session[:ratings].keys)
+    end
+    
+    if session[:sort] == 'title'
+      @movies = @movies.order(:title)
+    end
+    
+    if session[:sort] == 'release_date'
+      @movies = @movies.order(:release_date)
+    end
+      
   end
 
   #def index
