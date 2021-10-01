@@ -10,7 +10,6 @@ class MoviesController < ApplicationController
     
     sort = params[:sort] || session[:sort]
     
-    
     case sort
     when 'title'
       @title_header = 'hilite'
@@ -33,12 +32,12 @@ class MoviesController < ApplicationController
       @movies = Movie.all
     end
     
+    @movies = Movie.all
     
-    
-    if params[:session] == "clear"
-      session[:sort] = nil
-      session[:rating] = nil
-    end
+    #if params[:session] == "clear"
+    #  session[:sort] = nil
+    #  session[:rating] = nil
+    #end
     
     #if params[:ratings] != nil
     #  @selected_ratings = params[:ratings]
