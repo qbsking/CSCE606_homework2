@@ -40,8 +40,7 @@ class MoviesController < ApplicationController
     end
     
     if params[:ratings] != nil
-      @selected_ratings = params[:ratings] 
-      printf params[:ratings]
+      @selected_ratings = params[:ratings].merge session[:ratings]
       @movies = @movies.where(:rating => @selected_ratings.keys)
       session[:ratings] = @selected_ratings
     end
