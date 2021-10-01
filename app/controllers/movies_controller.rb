@@ -19,12 +19,12 @@ class MoviesController < ApplicationController
     when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
-      #session[:sort] = 'title'
+      session[:sort] = 'title'
       @sort_column = 'title'
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
-      #session[:sort] = 'release_date'
+      session[:sort] = 'release_date'
       @sort_column = 'release_date'
     end
     
