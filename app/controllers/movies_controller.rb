@@ -30,6 +30,9 @@ class MoviesController < ApplicationController
       @sort_column = 'release_date'
     end
     
+    session[:sort] = nil
+    session[:rating] = nil
+    
     if params[:session] == "clear"
       session[:sort] = nil
       session[:rating] = nil
