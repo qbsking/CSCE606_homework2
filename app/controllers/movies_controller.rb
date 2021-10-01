@@ -10,44 +10,40 @@ class MoviesController < ApplicationController
     
     sort = params[:sort] || session[:sort]
     
+    @all_ratings = Movie.all_ratings
+    @selected_ratings = params[:ratings] || session[:ratings] || {}
+    
+    @movies = Movie.all
+    
     case sort
     when 'title'
       @title_header = 'hilite'
       @movies = Movie.order(:title)
-      session[:sort] = 'title'
+      #session[:sort] = 'title'
       @sort_column = 'title'
       return
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
-      session[:sort] = 'release_date'
+      #session[:sort] = 'release_date'
       @sort_column = 'release_date'
       return
     end
     
-    @all_ratings = Movie.all_ratings
-    @selected_ratings = params[:ratings] || session[:ratings] || {}
-    
-    if @selected_ratings == {}
-      @movies = Movie.all
+    if params[:session] == "clear"
+      session[:sort] = nil
+      session[:rating] = nil
     end
     
-    @movies = Movie.all
+    if params[:ratings] != nil
+      @selected_ratings = params[:ratings]
+      @movies = @movies.where(:rating => @selected_ratings.keys)
+      session[:ratings] = @selected_ratings
+    end
     
-    #if params[:session] == "clear"
-    #  session[:sort] = nil
-    #  session[:rating] = nil
-    #end
-    
-    #if params[:ratings] != nil
-    #  @selected_ratings = params[:ratings]
-    #  @movies = @movies.where(:rating => @selected_ratings.keys)
-    #  session[:ratings] = @selected_ratings
-    #end
-    
-    #if session[:ratings] != nil
-    #  @movies = @movies.where(:rating => session[:ratings].keys)
-    #end
+    if session[:ratings] != nil
+      @movies = @movies.where(:rating => session[:ratings].keys)
+    end
     
   end
 
