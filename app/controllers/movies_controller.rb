@@ -11,27 +11,6 @@ class MoviesController < ApplicationController
     sort = params[:sort] || session[:sort]
     @all_ratings = Movie.all_ratings
     
-    case sort
-    when 'title'
-      @title_header = 'hilite'
-      @movies = Movie.order(:title)
-      session[:sort] = 'title'
-      if session[:ratings] != nil
-        @selected_ratings = session[:ratings]
-        @movies = @movies.where(:rating => @selected_ratings.keys)
-      end
-      return
-    when 'release_date'
-      @date_header = 'hilite'
-      @movies = Movie.order(:release_date)
-      session[:sort] = 'release_date'
-      if session[:ratings] != nil
-        @selected_ratings = session[:ratings]
-        @movies = @movies.where(:rating => @selected_ratings.keys)
-      end
-      return
-    end
-    
     @selected_ratings = params[:ratings] || session[:ratings] || {}
     
     if @selected_ratings == {}
@@ -61,6 +40,18 @@ class MoviesController < ApplicationController
       @movies = @movies.where(:rating => session[:ratings].keys)
     end
     
+    case sort
+    when 'title'
+      @title_header = 'hilite'
+      @movies = Movie.order(:title)
+      session[:sort] = 'title'
+      return
+    when 'release_date'
+      @date_header = 'hilite'
+      @movies = Movie.order(:release_date)
+      session[:sort] = 'release_date'
+      return
+    end
     
       
   end
