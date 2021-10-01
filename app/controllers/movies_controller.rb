@@ -21,13 +21,11 @@ class MoviesController < ApplicationController
       @movies = Movie.order(:title)
       #session[:sort] = 'title'
       @sort_column = 'title'
-      return
     when 'release_date'
       @date_header = 'hilite'
       @movies = Movie.order(:release_date)
       #session[:sort] = 'release_date'
       @sort_column = 'release_date'
-      return
     end
     
     if params[:session] == "clear"
