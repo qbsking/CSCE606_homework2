@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
     
     if @selected_ratings == {}
       @movies = Movie.all
+      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
     
     case sort
